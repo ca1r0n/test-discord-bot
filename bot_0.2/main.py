@@ -61,21 +61,3 @@ async def on_message(ctx):
                 await ctx.author.send(settings['end_test'])
             sql_test.update_answer(id_user,ctx.content,int(number_question))
 bot.run(settings['token'])
-
-#url=https://discordapp.com/oauth2/authorize?&client_id={}&scope=bot&permissions=8.format(setting[id])
-
-#TIME
-#import datetime
-#now_date=datetime.datetime.now().strftime("%d-%m-%Y %H:%M")
-
-#emb creat
-#emb=discord.Embed(title='Описание системы тикетов')
-#emb.add_field(name='', value="",inline=False)
-#await ctx.send(embed=emb)
-
-#Author in emb massage
-#emb.set_author(name=bot.user.name,icon_url=bot.user.avatar_url)
-#emb.set_footer(text=ctx.author.name, icon_url=ctx.author.avatar_url)
-
-#Status bot(not can have custon predix)
-#await bot.change_presence(status=discord.Status.online, activity=discord.Game(name="Говно из жопы"))   
