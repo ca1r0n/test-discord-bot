@@ -1,2 +1,10 @@
-# interrogation-bot
-bot asks 5 questions and writes answers in sqlite
+# Test discord.py bot
+
+Бот опрашивает людей и записывает их ответы и кол-во правильных ответов.
+Актуальная версия : 0.3
+
+# Update
+# Bot 0.3
+
+
+
