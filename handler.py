@@ -1,12 +1,13 @@
 import sqlite3
 from config import settings
-conn = sqlite3.connect("answer_user.db")
+conn = sqlite3.connect(r"answer_user.db") # или :memory: чтобы сохранить в RAM
 cursor = conn.cursor()
 try:
-    create_TABLE='''number_answer ,id_user, right_answer '''
+    create_TABLE='''number_answer ,id_user, full_name, right_answer '''
     for numbers in range(1,settings['number_of_questions']+1):
         create_TABLE=create_TABLE+f''',answer_{numbers} '''
     cursor.execute(f'''CREATE TABLE answer({create_TABLE})''')
+
 except:
     pass
 
@@ -39,14 +40,21 @@ class sql_test:
         cursor.execute(sql, (number+1, id_user))
         conn.commit() 
     @staticmethod
-    def app_new(id_user):
-        create_TABLE=f''''0' ,{id_user},0 '''
+    def app_new(id_user, full_name):
+        create_TABLE=f"'0' ,{id_user}, '{full_name}',0 "
         for i in range(1,settings['number_of_questions']+1):
-            create_TABLE=create_TABLE+f''',' ' '''
-        sql=f'''INSERT INTO answer VALUES ({create_TABLE})'''
+            create_TABLE=create_TABLE+f",' ' "
+        sql=f"INSERT INTO answer VALUES ({create_TABLE})"
         cursor.execute(sql)
         conn.commit() 
     @staticmethod
     def right_answer(id_user):
         sql=f"SELECT right_answer FROM answer WHERE id_user = {id_user}"
         return(cursor.execute(sql).fetchone()[0])
+    @staticmethod
+    def top_user(top):
+        top_user=[]
+        sql=f'''SELECT id_user,right_answer FROM answer AS a ORDER BY right_answer DESC LIMIT {top}'''
+        for id in cursor.execute(sql):
+            top_user.append([id[0],id[1]])
+        return(top_user)
